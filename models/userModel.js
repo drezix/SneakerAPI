@@ -29,7 +29,6 @@ const saveUser = async(username, password, isAdmin = false) => {
     }
 }
 
-
 const updateUser = async(id, username) => {
     try {
         const user = await userModel.findByIdAndUpdate(id, {username}, {new: true});
