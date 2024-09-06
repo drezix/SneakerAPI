@@ -37,3 +37,12 @@ exports.installDB = async (req, res) => {
     }
 }
 
+exports.dropDB = async (req, res) => {
+    try {
+        await userModel.deleteMany({});
+        await sneakerModel.deleteMany({});
+        res.status(200).json({ message: 'Database dropped successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error dropping database', error: error.message || error});
+    }
+}
