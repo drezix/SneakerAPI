@@ -1,7 +1,8 @@
-const { userModel } = require('../models/userModel');
-const { sneakerModel } = require('../models/sneakerModel');
+const userModel = require('../models/userModel');
+const sneakerModel = require('../models/sneakerModel');
 const bcrypt = require('bcrypt');
 
+// Install the database with some users and sneakers
 exports.installDB = async (req, res) => {
     try {
         // Delete all users and sneakers
@@ -11,8 +12,10 @@ exports.installDB = async (req, res) => {
         // Define users
         const usersCreate = [
             { username: 'admin1', password: 'admintest', isAdmin: true },
+            { username: 'admin2', password: 'admintest', isAdmin: true },
             { username: 'user1', password: 'usertest', isAdmin: false },
             { username: 'user2', password: 'usertest', isAdmin: false },
+            { username: 'user3', password: 'usertest', isAdmin: false },
         ];
 
         // Hash the passwords
@@ -37,6 +40,7 @@ exports.installDB = async (req, res) => {
     }
 }
 
+// Drop all users and sneakers
 exports.dropDB = async (req, res) => {
     try {
         await userModel.deleteMany({});
