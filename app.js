@@ -3,13 +3,21 @@ const path = require('path')
 const userRoutes = require('./routes/userRoutes');
 const sneakerRoutes = require('./routes/sneakerRoutes');
 const installRoute = require('./routes/installRoute');
+const authRoute = require('./routes/authRoute');
+const adminRoutes = require('./routes/adminRoute');
 
 const app = express()
 const port = 3000
 
 app.use(express.json());
 
-//--------------------------------------------USER--------------------------------------------
+//--------------------------------------------AUTH-----------------------------------------------
+app.use('/auth', authRoute);
+
+//--------------------------------------------ADMIN----------------------------------------------
+app.use('/admin', adminRoutes);
+
+//--------------------------------------------USER-----------------------------------------------
 app.use('/user', userRoutes);
 
 //--------------------------------------------SNEAKER--------------------------------------------
