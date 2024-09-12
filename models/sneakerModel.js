@@ -18,6 +18,10 @@ const sneakerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    stores: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Store'
+    }]
 });
 
 const sneakerModel = mongoose.model('Sneaker', sneakerSchema);

@@ -1,4 +1,5 @@
 const userModel = require('../models/userModel');
+const bcrypt = require('bcrypt');
 
 // Updates user (only admin)
 exports.updateUser = async (req, res) => {
@@ -54,6 +55,27 @@ exports.getByID = async (req, res) => {
             return res.status(404).json({ msg: 'User not found' });
         }
         res.status(200).json({ user });
+    } catch (error) {
+        res.status(500).json({ msg: 'Error getting user', error: error.message });
+    }
+};
+
+// Get user his own data
+exports.getOwnData = async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const user = await userModel.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
+
+        // Password validation
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ msg: 'Invalid password' });
+        }
+
+        res.status(200).json({ id: user._id });
     } catch (error) {
         res.status(500).json({ msg: 'Error getting user', error: error.message });
     }
