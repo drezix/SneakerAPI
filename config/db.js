@@ -17,9 +17,9 @@ try{
   console.log('Error connecting to the database', error);
 }
   
-  mongoose.connection.on('error', err => {
-    logError(err);
-  });
+mongoose.connection.on('error', err => {
+  logError(err);
+});
 
 connect();
 

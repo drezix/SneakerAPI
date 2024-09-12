@@ -4,7 +4,10 @@ const userController = require('../controllers/userController');
 const { authMiddleware, adminMiddleware } = require('../middlewares/authMiddleware');
 
 // Authentication middleware
-router.use(authMiddleware, adminMiddleware);
+router.use(authMiddleware);
+
+// GET /user/me
+router.get('/me', userController.getOwnData);
 
 // POST /user
 router.put('/:id', adminMiddleware, userController.updateUser);

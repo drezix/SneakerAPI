@@ -15,7 +15,10 @@ router.put('/:id', adminMiddleware, sneakerController.updateSneaker);
 // DELETE /sneaker/:id
 router.delete('/:id', adminMiddleware, sneakerController.removeSneaker);
 
-// GET /sneaker/:id
+// GET /sneaker/
 router.get('/', sneakerController.listSneaker);
+
+// GET /sneaker/:id
+router.get('/:id', sneakerController.getSneakerByID);
 
 module.exports = router;
