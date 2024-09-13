@@ -45,6 +45,10 @@ exports.login = async (req, res) => {
             return res.status(400).json({ msg: 'Invalid password' });
         }
 
+        // Update access count
+        user.accessCount += 1;
+        await user.save();
+
         // Token generation
         const token = jwt.sign({ userId: user._id, isAdmin: user.isAdmin }, process.env.SECRET_KEY, { expiresIn: '1h' });
 
